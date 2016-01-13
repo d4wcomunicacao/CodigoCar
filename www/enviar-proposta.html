@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<title>Phonegap</title>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<link rel="stylesheet" href="jq/jquery.mobile-1.4.2.css" />
+<script src="jq/jquery-2.1.1.min.js"></script>
+<script src="jq/jquery.mobile-1.4.2.js"></script>
+<script>
+function txtBoxFormat(strField, sMask, evtKeyPress)
+{
+  var i, nCount, sValue, fldLen, mskLen,bolMask, sCod, nTecla;
+  if(window.event)
+  { // Internet Explorer
+    nTecla = evtKeyPress.keyCode;
+  }
+  else if(evtKeyPress.which)
+  { // Nestcape / firefox
+    nTecla = evtKeyPress.which;
+  }
+  if (nTecla != 8)
+  {
+    sValue = document.getElementById(strField).value;
+    sValue = sValue.toString().replace( "-", "" );
+    sValue = sValue.toString().replace( "-", "" );
+    sValue = sValue.toString().replace( ".", "" );
+    sValue = sValue.toString().replace( ".", "" );
+    sValue = sValue.toString().replace( ":", "" );
+    sValue = sValue.toString().replace( ":", "" );
+    sValue = sValue.toString().replace( "/", "" );
+    sValue = sValue.toString().replace( "/", "" );
+    sValue = sValue.toString().replace( "(", "" );
+    sValue = sValue.toString().replace( "(", "" );
+    sValue = sValue.toString().replace( ")", "" );
+    sValue = sValue.toString().replace( ")", "" );
+    sValue = sValue.toString().replace( " ", "" );
+    sValue = sValue.toString().replace( " ", "" );
+    fldLen = sValue.length;
+    mskLen = sMask.length;
+    i = 0;
+    nCount = 0;
+    sCod = "";
+    mskLen = fldLen;
+    while (i <= mskLen)
+	{
+      bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ".")  || (sMask.charAt(i) == ":") || (sMask.charAt(i) == "/"))
+      bolMask = bolMask || ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask.charAt(i) == " "))
+      if (bolMask)
+	  {
+        sCod += sMask.charAt(i);
+        mskLen++;
+	  }
+      else
+	  {
+        sCod += sValue.charAt(nCount);
+        nCount++;
+      }
+      i++;
+    }
+    document.getElementById(strField).value = sCod;
+    if (nTecla != 8)
+	{ // backspace
+      if (sMask.charAt(i-1) == "9")
+	  { // apenas números...
+        return ((nTecla > 47) && (nTecla < 58));
+	  } // números de 0 a 9
+      else
+	  { // qualquer caracter...
+        return true;
+      }
+	}
+    else
+	{
+      return true;
+    }
+  }//fim do if que verifica se é backspace
+}//Fim da Função Máscaras Gerais
+
+var url = location.href;
+if (url.indexOf("?") > 0) {
+ query = url.split("?"); param = query[1].split("&");
+ for (i=0; i < param.length; i++) { v = param[i].split("="); eval("var "+v[0]+"='"+v[1]+"';"); } 
+} 
+
+$(function() {
+	$("#form").submit(function() {
+	
+		if(document.form.nome.value == "") {
+			alert("Digite seu nome!"); 
+			document.form.nome.focus(); 
+			return false; 
+		}
+		if(document.form.email.value == "") {
+			alert("Digite seu e-mail!"); 
+			document.form.email.focus(); 
+			return false; 
+		}
+		if(document.form.celular.value == "") {
+			alert("Digite seu celular!"); 
+			document.form.celular.focus(); 
+			return false; 
+		}
+		if(document.form.mensagem.value == "") {
+			alert("Digite sua mensagem!"); 
+			document.form.mensagem.focus(); 
+			return false; 
+		}
+	
+		var fnome 			= $("#nome").val();
+		var femail 			= $("#email").val();
+		var fcelular 		= $("#celular").val();
+		var fmensagem 		= $("#mensagem").val();
+		var fquero_financiar = $("#quero_financiar").val();
+		var fquero_veiculo 	= $("#quero_veiculo").val();
+		
+		//alert(codprod);
+		
+		 $.ajax({type: "POST", 
+				//url: "http://10.0.2.2:8080/ConsumidorNaJustica/salvarCaso.php",
+				url: "http://megamed.saude.ws/AppCodigoCar/salvarProposta.php",
+				data: ({nome: fnome, email: femail, celular: fcelular, mensagem: fmensagem, quero_financiar: fquero_financiar, quero_veiculo: fquero_veiculo, codprod: codprod}),
+			  cache: false,
+			  dataType: "text",
+			  success: Enviamos
+			});
+		
+	});
+		
+	function Enviamos(data){       
+		//alert(data+"Reporte enviado");
+		$.mobile.changePage( "enviar-proposta2.html", { transition: "slideup", role:"dialog"});
+	}
+	
+});
+
+</script>
+</head>
+<body onLoad="init();"><script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
+
+        function checkConnection() {
+            var networkState = navigator.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI]     = 'WiFi connection';
+            states[Connection.CELL_2G]  = 'Cell 2G connection';
+            states[Connection.CELL_3G]  = 'Cell 3G connection';
+            states[Connection.CELL_4G]  = 'Cell 4G connection';
+            states[Connection.CELL]     = 'Cell generic connection';
+            states[Connection.NONE]     = 'No network connection';
+
+			if(states[networkState] == 'No network connection'){
+				alert('Conecte-se à internet para utilizar o app CodigoCar');
+				navigator.app.exitApp();
+			}
+        }
+
+    </script>
+<!-- Menu -->
+<script type="text/javascript">
+	function exitFromApp(){
+	   console.log("Fechando Aplicação");
+	   navigator.app.exitApp();
+	}
+	</script>
+<script type="text/javascript" language="javascript">
+	
+	$(document).ready(function() {   
+            var sideslider = $('[data-toggle=collapse-side]');
+            var sel = sideslider.attr('data-target');
+            var sel2 = sideslider.attr('data-target-2');
+            sideslider.click(function(event){
+                $(sel).toggleClass('in');
+                $(sel2).toggleClass('out');
+            });
+        });
+
+	function init() {
+		  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarDetalhes.php?cod="+codprod+"",function(data){
+				//console.log(JSON.stringify(data));
+				//alert('foi');
+				//alert(JSON.stringify(data));
+				$(data).each(function (index, data) {
+					$("#veiculo").append(
+						data.marca+" "+data.modelo);
+				});	
+		  });
+	}
+	
+	</script>
+<style type="text/css">
+	<!--
+	-->
+	@media screen and (max-width: 760px) {
+		.side-collapse-container {
+			width: 100%;
+			position: relative;
+			left: 0;
+			transition: left .4s;
+		}
+		.side-collapse-container.out {
+			left: 200px;
+		}
+		.side-collapse {
+			top: 50px;
+			bottom: 0;
+			left: 0;
+			width: 200px;
+			position: fixed;
+			overflow: hidden;
+			transition: width .4s;
+		}
+		.side-collapse.in {
+			width: 0;
+		}
+	}
+	</style>
+<div class="container">
+  <nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header" style="padding-left: 30px;">
+      <button data-toggle="collapse-side" data-target=".side-collapse"
+					data-target-2=".side-collapse-container" type="button"
+					class="navbar-toggle pull-left"> <span class="icon-bar"></span><span class="icon-bar"></span><span
+						class="icon-bar"></span> </button>
+      <div align="center" style="padding-top: 5px; margin-right: 16%;"> </div>
+    </div>
+    <div class="navbar-inverse side-collapse in">
+      <nav role="navigation" class="navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Buscar código</a></li>
+          <li><a href="buscaAvancada.html">Busca avançada</a></li>
+		  <li><a href="barcodescanner.html">Leitor de QR Code</a></li>
+          <li><a href="#" onClick="navigator.app.loadUrl('http://www.codigocar.com.br/', { openExternal:true });">Acessar site</a></li>
+          <li><a href="#" onClick="exitFromApp();">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+</div>
+<!-- Fim do menu -->
+<div class="row" style="margin-top:50px;"></div>
+<div class="container" align="center">
+  <form method="POST" id="form" name="form">
+    <h1>Enviar proposta </h1>
+    <br>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Veículo</label>
+      <div id="veiculo"></div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Nome Completo </label>
+      <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome" required="required">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">E-mail</label>
+      <input name="email" id="email" type="email" class="form-control" placeholder="Email" required="required">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Celular</label>
+      <input type="tel" class="form-control" name="celular" id="celular" placeholder="Celular" maxlength="14" onKeyPress="return txtBoxFormat('celular','(99)99999-9999',event);" required="required">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Mensagem: </label>
+      <textarea class="form-control" id="mensagem" name="mensagem" rows="5" placeholder="Mensagem" style="height: 120px" required="required"></textarea>
+    </div>
+    <div class="form-group">
+		<div class="container">
+      <div class="row">
+        <div class="col-xs-1">
+          <input type="checkbox" name="quero_financiar" id="quero_financiar" value="S" style="width: 25px; height: 31px; margin:0px; font-size: 16px">
+        </div>
+        <div class="col-xs-10" align="left" onclick="if(document.getElementById('quero_financiar').checked == true){document.getElementById('quero_financiar').checked = false}else{document.getElementById('quero_financiar').checked = true}">Quero Financiar </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1">
+          <input type="checkbox" name="quero_veiculo" id="quero_veiculo" value="S" style="width: 25px; height: 31px; margin:0px; font-size: 16px">
+        </div>
+        <div class="col-xs-10" align="left" onclick="if(document.getElementById('quero_veiculo').checked == true){document.getElementById('quero_veiculo').checked = false}else{document.getElementById('quero_financiar').checked = true}">Quero veículo na troca </div>
+      </div>
+	  </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success btn-lg btn-block" id="salvarCaso">Enviar &gt;&gt; </button>
+    <br>
+  </form>
+</div>
+</body>
+</html>
