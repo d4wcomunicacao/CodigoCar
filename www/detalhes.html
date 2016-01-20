@@ -120,12 +120,22 @@ function init() {
 			$(data).each(function (index, data) {
 				$("#detalhes").append(
 					"<img src='http://codigocar.com.br/site/fotos/"+data.foto+"' class='img-responsive'><br>"+
-					"<img src='http://codigocar.com.br/site/fotos/"+data.foto2+"' class='img-responsive'"+
-					(data.foto2 == null ? " style='display:none'>": '><br>')+
-					"<img src='http://codigocar.com.br/site/fotos/"+data.foto3+"' class='img-responsive'"+
-					(data.foto3 == null ? " style='display:none'>": '><br>')+
-					"<img src='http://codigocar.com.br/site/fotos/"+data.foto4+"' class='img-responsive'"+
-					(data.foto4 == null ? " style='display:none'>": '><br>')+
+					"<table class='table' border='0'>"+
+					"<tr>"+
+					"<td>"+
+					"<a href='foto.html?foto="+data.foto2+"&cod="+cod+"'><img src='http://codigocar.com.br/site/fotos/"+data.foto2+"' class='img-responsive'"+
+					(data.foto2 == null ? " style='display:none'></a>": '></a>')+
+					"</td>"+
+					"<td>"+
+					"<a href='foto.html?foto="+data.foto3+"&cod="+cod+"'><img src='http://codigocar.com.br/site/fotos/"+data.foto3+"' class='img-responsive'"+
+					(data.foto3 == null ? " style='display:none'></a>": '></a>')+
+					"</td>"+
+					"<td>"+
+					"<a href='foto.html?foto="+data.foto4+"&cod="+cod+"'><img src='http://codigocar.com.br/site/fotos/"+data.foto4+"' class='img-responsive'"+
+					(data.foto4 == null ? " style='display:none'></a>": '></a>')+
+					"</td>"+
+					"</tr>"+
+					"</table>"+
 					"<p style='text-align:left; padding-left:10px; font-weight:bold'><strong>"+data.marca+" "+data.modelo+"</strong></p>"+
 					"<p style='color:red; text-align:left; padding-left:10px; font-weight:bold'>R$ "+float2moeda(data.preco)+"</p>"+
 					"<p style='text-align:left; padding-left:10px'>Ano: "+data.ano+"<br>"+

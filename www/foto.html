@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="iso-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<title>Phonegap</title>
+</head>
+<body style="background-color:black">
+<div align="center">
+<table class="table" border="0">
+<tr style="border: none">
+	<td height="10px;" align="right">
+	<a id="link" style="color: white;border: none; font-size:20px; text-decoration: none"><strong>X</strong></a>
+	<br><br><br><br><br><br><br><br>
+	</td>
+</tr>
+<tr>
+	<td style="border: none"><img id="foto" class="img-responsive"></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+var url = location.href;
+if (url.indexOf("?") > 0) {
+ query = url.split("?"); param = query[1].split("&");
+ for (i=0; i < param.length; i++) { v = param[i].split("="); eval("var "+v[0]+"='"+v[1]+"';"); } 
+} 
+
+document.getElementById("foto").src = "http://codigocar.com.br/site/fotos/"+foto+"";
+document.getElementById("link").href = "detalhes.html?cod="+cod+"";
+</script>
+</body>
+</html>
