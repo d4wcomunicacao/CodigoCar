@@ -46,6 +46,5 @@ $resultadosJson = json_encode($resultados);
 
 /*muestra el resultado en un formato que no da problemas de seguridad en browsers */
 echo $_GET['jsoncallback'] . '(' . $resultadosJson . ');';
-echo 'Resultado: '.$resultadosJson;
 die();
 ?>
