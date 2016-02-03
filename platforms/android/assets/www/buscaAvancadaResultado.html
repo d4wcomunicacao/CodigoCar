@@ -75,7 +75,7 @@ function float2moeda(num) {
 	
 	//alert(cod);
 	function init() {
-		  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarQtdResultados.php?marca="+marca+"&modelo="+modelo+"&ano_de="+ano_de+"&ano_ate="+ano_ate+"&preco_de="+preco_de+"&preco_ate="+preco_ate+"&estado="+estado+"&cidade="+cidade+"",function(data){
+		  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarQtdResultados.php?marca="+marca+"&modelo="+modelo+"&ano_de="+ano_de+"&ano_ate="+ano_ate+"&preco_de="+preco_de+"&preco_ate="+preco_ate+"&estado="+estado+"&cidade="+cidade+"",function(data){
 				console.log(JSON.stringify(data));
 				//alert('foi');
 				//alert(JSON.stringify(data));
@@ -86,7 +86,7 @@ function float2moeda(num) {
 				});	
 		  });
 		  
-		  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarCarros.php?marca="+marca+"&modelo="+modelo+"&ano_de="+ano_de+"&ano_ate="+ano_ate+"&preco_de="+preco_de+"&preco_ate="+preco_ate+"&estado="+estado+"&cidade="+cidade+"",function(data){
+		  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarCarros.php?marca="+marca+"&modelo="+modelo+"&ano_de="+ano_de+"&ano_ate="+ano_ate+"&preco_de="+preco_de+"&preco_ate="+preco_ate+"&estado="+estado+"&cidade="+cidade+"",function(data){
 				console.log(JSON.stringify(data));
 				//alert('foi');
 				//alert(JSON.stringify(data));

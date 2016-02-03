@@ -145,7 +145,7 @@
 			<script type="text/javascript">
 	$(function(){
 		$('#marca').hide();
-		$.getJSON('http://megamed.saude.ws/AppCodigoCar/marcas.ajax.php', function(j){
+		$.getJSON('http://codigocar.com.br/AppCodigoCar/marcas.ajax.php', function(j){
 			var options = '<option value="">Marca</option>';	
 			for (var i = 0; i < j.length; i++) {
 				options += '<option value="' + j[i].marca + '">' + j[i].marca + '</option>';
@@ -157,7 +157,7 @@
 		$('#marca').change(function(){
 			if( $(this).val() ) {
 				$('#modelo').hide();
-				$.getJSON('http://megamed.saude.ws/AppCodigoCar/modelos.ajax.php?search=',{marca: $(this).val(), ajax: 'true'}, function(j){
+				$.getJSON('http://codigocar.com.br/AppCodigoCar/modelos.ajax.php?search=',{marca: $(this).val(), ajax: 'true'}, function(j){
 					var options = '<option value="">Modelo</option>';	
 					for (var i = 0; i < j.length; i++) {
 						options += '<option value="' + j[i].modelo + '">' + j[i].modelo + '</option>';
@@ -1179,7 +1179,7 @@
 		$('#estado').change(function(){
 			if( $(this).val() ) {
 				$('#cidade').hide();
-				$.getJSON('http://megamed.saude.ws/AppCodigoCar/cidades.ajax.php?search=',{estado: $(this).val(), ajax: 'true'}, function(j){
+				$.getJSON('http://codigocar.com.br/AppCodigoCar/cidades.ajax.php?search=',{estado: $(this).val(), ajax: 'true'}, function(j){
 					var options = '<option value=""></option>';	
 					for (var i = 0; i < j.length; i++) {
 						options += '<option value="' + j[i].nome + '">' + j[i].nome + '</option>';
@@ -1215,7 +1215,7 @@
 					var destado			= $("#estado").val()
 					var dcidade 		= $("#cidade").val()
 
-					archivoValidacion = "http://megamed.saude.ws/AppCodigoCar/buscarAvancada.php?jsoncallback=?"
+					archivoValidacion = "http://codigocar.com.br/AppCodigoCar/buscarAvancada.php?jsoncallback=?"
 
 					$.getJSON(archivoValidacion, {
 						marca 			: dmarca,

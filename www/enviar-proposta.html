@@ -124,7 +124,7 @@ $(function() {
 		
 		 $.ajax({type: "POST", 
 				//url: "http://10.0.2.2:8080/ConsumidorNaJustica/salvarCaso.php",
-				url: "http://megamed.saude.ws/AppCodigoCar/salvarProposta.php",
+				url: "http://codigocar.com.br/AppCodigoCar/salvarProposta.php",
 				data: ({nome: fnome, email: femail, celular: fcelular, mensagem: fmensagem, quero_financiar: fquero_financiar, quero_veiculo: fquero_veiculo, codprod: codprod}),
 			  cache: false,
 			  dataType: "text",
@@ -194,7 +194,7 @@ $(function() {
         });
 
 	function init() {
-		  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarDetalhes.php?cod="+codprod+"",function(data){
+		  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarDetalhes.php?cod="+codprod+"",function(data){
 				//console.log(JSON.stringify(data));
 				//alert('foi');
 				//alert(JSON.stringify(data));

@@ -113,7 +113,7 @@ function formataData(data){
 
 //alert(cod);
 function init() {
-	  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarDetalhes.php?cod="+cod+"",function(data){
+	  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarDetalhes.php?cod="+cod+"",function(data){
 			console.log(JSON.stringify(data));
 			//alert('foi');
 			//alert(JSON.stringify(data));
@@ -151,7 +151,7 @@ function init() {
 					  "<br>");
 			});	
 	  });
-	  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarOpcionais.php?cod="+cod+"",function(data){
+	  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarOpcionais.php?cod="+cod+"",function(data){
 			console.log(JSON.stringify(data));
 			//alert('foi');
 			//alert(JSON.stringify(data));
@@ -160,7 +160,7 @@ function init() {
 					""+data.opcional+"");
 			});	
 	  });
-	  $.getJSON("http://megamed.saude.ws/AppCodigoCar/listarDetalhes.php?cod="+cod+"",function(data){
+	  $.getJSON("http://codigocar.com.br/AppCodigoCar/listarDetalhes.php?cod="+cod+"",function(data){
 			console.log(JSON.stringify(data));
 			//alert('foi');
 			//alert(JSON.stringify(data));
