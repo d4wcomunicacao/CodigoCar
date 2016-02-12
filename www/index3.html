@@ -2,34 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>animate demo</title>
-  <style>
-  div {
-    position: absolute;
-    background-color: #abc;
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin: 5px;
-  }
-  </style>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
- <br><br><br><br><br>
-<div class="block" align="left" style="margin-left=-10000px;"><img src="logo.jpg"></div>
- 
+<div align="center"><br><br><br><br><br><img src="logo_app512.jpg" class="img-responsive"></div>
 <script>
-  $( ".block:first" ).animate({
-    left: 400
-  }, {
-    duration: 800,
-    step: function( now, fx ){
-      $( ".block:gt(0)" ).css( "left", now );
-    }
-  });
-
-
 $(function(){
    setTimeout(function() {
 		location.href = 'index2.html';
