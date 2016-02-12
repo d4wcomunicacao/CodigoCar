@@ -1,159 +1,41 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="css/bootstrap.css" rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<title>Phonegap</title>
-<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-<script src="jq/jquery.mobile-1.3.1.min.js"></script>
-	
-	<title>Phonegap</title>
+  <meta charset="utf-8">
+  <title>animate demo</title>
+  <style>
+  div {
+    position: absolute;
+    background-color: #abc;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 5px;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-	<!-- Menu -->
-	<script type="text/javascript">
-	function exitFromApp(){
-	   console.log("Fechando Aplicação");
-	   navigator.app.exitApp();
-	}
-	</script>
-	<script type="text/javascript" language="javascript">
-	
-	$(document).ready(function() {   
-            var sideslider = $('[data-toggle=collapse-side]');
-            var sel = sideslider.attr('data-target');
-            var sel2 = sideslider.attr('data-target-2');
-            sideslider.click(function(event){
-                $(sel).toggleClass('in');
-                $(sel2).toggleClass('out');
-            });
-        });
+ <br><br><br><br><br>
+<div class="block" align="left" style="margin-left=-10000px;"><img src="logo.jpg"></div>
+ 
+<script>
+  $( ".block:first" ).animate({
+    left: 400
+  }, {
+    duration: 800,
+    step: function( now, fx ){
+      $( ".block:gt(0)" ).css( "left", now );
+    }
+  });
 
-	</script>
-	<style type="text/css">
-	<!--
-	-->
-	@media screen and (max-width: 760px) {
-		.side-collapse-container {
-			width: 100%;
-			position: relative;
-			left: 0;
-			transition: left .4s;
-		}
-		.side-collapse-container.out {
-			left: 200px;
-		}
-		.side-collapse {
-			top: 50px;
-			bottom: 0;
-			left: 0;
-			width: 200px;
-			position: fixed;
-			overflow: hidden;
-			transition: width .4s;
-		}
-		.side-collapse.in {
-			width: 0;
-		}
-	}
-	</style>
-	<div class="container">
-		<nav class="navbar navbar-fixed-top navbar-inverse">
-			<div class="navbar-header" style="padding-left: 30px;">
-				<button data-toggle="collapse-side" data-target=".side-collapse"
-					data-target-2=".side-collapse-container" type="button"
-					class="navbar-toggle pull-left">
-					<span class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span>
-				</button>
-				<div align="center" style="padding-top: 5px; margin-right: 16%;">
-				</div>
-			</div>
-			<div class="navbar-inverse side-collapse in">
-				<nav role="navigation" class="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Buscar código</a></li>
-						<li><a href="buscaAvancada.html">Busca avançada</a></li>
-						<li><a href="#" id="scan">Leitor de QR Code</a></li>
-						<li><a href="#"
-							onClick="navigator.app.loadUrl('http://www.codigocar.com.br/', { openExternal:true });">Acessar
-								site</a></li>
-						<li><a href="#" onClick="exitFromApp();">Sair</a></li>
-					</ul>
-				</nav>
-			</div>
-		</nav>
-	</div>
-	<!-- Fim do menu -->
-	<div class="container" align="center">
-		<div class="row" style="margin-top: 50px;">
-			<img src="images/logo.jpg" border="0">
-			<div style="background-color: #fe0000; padding-top: 2px;">
-			<h2 style="color: #FFFFFF">Insira o código do veículo</h2>
-			<form id="formulario" name="formulario">
-				<input type="text" class="form-control" name="nombredeusuario" id="nombredeusuario" style="width: 50%" maxlength="6"> <br>
-				<button type="submit" class="btn btn-default btn-lg btn-block" style="width: 50%;background-color: #f7f7f9">Buscar</button><br>
-			</div>
-			</form>
-			<br>
-			<button type="button" class="btn btn-default btn-lg btn-block" style="width:50%;background-color: #f7f7f9" onclick="location.href='buscaAvancada.html'">Busca avançada</button>
-			<script>
-			$('#formulario')
-				.submit(
-						function() {
-						
-							if(document.formulario.nombredeusuario.value=="") {
-								alert("Digite o código!"); 
-								document.formulario.nombredeusuario.focus(); 
-								return false; 
-							}
 
-							// recolecta los valores que inserto el usuario
-							var datosUsuario = $("#nombredeusuario").val()
-
-							archivoValidacion = "http://codigocar.com.br/AppCodigoCar/buscarCodigo.php?jsoncallback=?"
-
-							$.getJSON(archivoValidacion, {
-								usuario : datosUsuario
-							}).done(function(respuestaServer) {
-
-								if (respuestaServer.validacion == "ok") {
-
-									/// si la validacion es correcta, muestra la pantalla "home"
-									location.href = "detalhes.html?cod="+datosUsuario+"";
-
-								} else {
-									alert("Veículo não encontrado!");
-									/// ejecutar una conducta cuando la validacion falla
-								}
-
-							})
-							return false;
-				})
-			</script>
-			<br>
-			<img src="images/botao_app.jpg" id="scan2" class="img-responsive" style="width: 50%"><br>
-			
-			<script type="text/javascript" src="cordova.js"></script>
-			<script type="text/javascript" src="barcodescanner.js"></script>
-			<script type="text/javascript" src="js/index.js"></script>
-			<script type="text/javascript">
-				app.initialize();
-			</script>
-			
-			<a
-				onClick="navigator.app.loadUrl('http://www.codigocar.com.br/', { openExternal:true });"
-				style="text-decoration: none">
-				<button type="button" class="btn btn-default btn-lg btn-block"
-					style="width: 50%;background-color: #f7f7f9">Acessar site</button>
-			</a><br>
-		</div>
-	</div>
+$(function(){
+   setTimeout(function() {
+		location.href = 'index2.html';
+   }, 600);
+});
+</script>
+ 
 </body>
 </html>
